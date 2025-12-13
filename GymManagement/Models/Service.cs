@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GymManagement.Models
 {
@@ -14,6 +15,7 @@ namespace GymManagement.Models
 
         [Required]
         [Range(0, 10000)]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         public int GymId { get; set; }

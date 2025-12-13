@@ -18,5 +18,24 @@ namespace GymManagement.Data
         public DbSet<MemberProfile> MemberProfiles { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Appointment -> Trainer: cascade delete yerine Restrict
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Trainer)
+                .WithMany(t => t.Appointments)   // Trainer modelinde ICollection<Appointment> yoksa .WithMany() de diyebilirsin
+                .HasForeignKey(a => a.TrainerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Appointment -> Service: cascade delete yerine Restrict
+            builder.Entity<Appointment>()
+                .HasOne(a => a.Service)
+                .WithMany()                      // Service tarafında ICollection<Appointment> yoksa böyle bırak
+                .HasForeignKey(a => a.ServiceId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
     }
 }

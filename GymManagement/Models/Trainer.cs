@@ -17,5 +17,7 @@ namespace GymManagement.Models
 
         public ICollection<Service>? Services { get; set; }
         public ICollection<TrainerAvailability>? Availabilities { get; set; }
+
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     }
 }
