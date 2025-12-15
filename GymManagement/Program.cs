@@ -43,4 +43,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+await DbInitializer.SeedRolesAndAdminAsync(app.Services);
 app.Run();
